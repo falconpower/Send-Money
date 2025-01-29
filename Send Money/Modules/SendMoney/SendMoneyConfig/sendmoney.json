@@ -37,7 +37,7 @@
               "placeholder": null,
               "type": "text",
               "validation": "^[A-Za-z0-9 ]{1,64}$",
-              "max_length": 64,
+              "max_length": 10,
               "validation_error_message": "Bank account number is required"
             },
             {
@@ -91,7 +91,7 @@
               "placeholder": null,
               "type": "text",
               "validation": "^[A-Za-z0-9 ]{1,64}$",
-              "max_length": 64,
+              "max_length": 10,
               "validation_error_message": "Bank account number is required"
             },
             {
@@ -155,7 +155,7 @@
               "placeholder": null,
               "type": "text",
               "validation": "^[A-Za-z0-9 ]{1,64}$",
-              "max_length": 64,
+              "max_length": 10,
               "validation_error_message": "Bank account number is required"
             },
             {
@@ -219,7 +219,7 @@
               "placeholder": null,
               "type": "text",
               "validation": "^[A-Za-z0-9 ]{1,64}$",
-              "max_length": 64,
+              "max_length": 10,
               "validation_error_message": "Bank account number is required"
             },
             {
@@ -283,7 +283,7 @@
               "placeholder": null,
               "type": "text",
               "validation": "^[A-Za-z0-9 ]{1,64}$",
-              "max_length": 64,
+              "max_length": 10,
               "validation_error_message": "Bank account number is required"
             },
             {
