@@ -71,7 +71,7 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
     NSLayoutConstraint.activate([
       listTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
       listTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-      listTableView.topAnchor.constraint(equalTo: self.view.topAnchor),
+      listTableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100),
       listTableView.bottomAnchor.constraint(equalTo: stickyButton.topAnchor)
     ])
   }
