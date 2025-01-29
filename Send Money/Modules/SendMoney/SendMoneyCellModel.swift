@@ -7,6 +7,9 @@
 
 class SendMoneyCellModel: SMCellViewModel {
   typealias Cell = SendMoneyDropdownCell
+  var validation: String?
+  var maxLength: Int?
+  var validationMessage: String?
   var title: String?
   var placeHolder: String?
   var cellProvider: CellProvider
@@ -20,7 +23,10 @@ class SendMoneyCellModel: SMCellViewModel {
        title: String? = nil,
        placeHolder: String? = nil,
        options: [String]? = nil,
-       selectedValue: String? = nil) {
+       selectedValue: String? = nil,
+       validation: String? = nil,
+       maxLength: Int? = nil,
+       validationMessage: String? = nil) {
     self.cellUIType = cellUIType
     self.cellProvider = cellProvider
     self.identifier = identifier
@@ -28,6 +34,9 @@ class SendMoneyCellModel: SMCellViewModel {
     self.placeHolder = placeHolder
     self.options = options
     self.selectedValue = selectedValue
+    self.validation = validation
+    self.maxLength = maxLength
+    self.validationMessage = validationMessage
   }
 }
 

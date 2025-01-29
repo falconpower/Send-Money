@@ -120,7 +120,10 @@ class SendMoneyViewModel: SMTableViewModel<SendMoneyCellModel> {
         identifier: field.name,
         title: field.label?.en,
         placeHolder: field.placeholder,
-        options: field.options?.map({$0.label ?? ""})
+        options: field.options?.map({$0.label ?? ""}),
+        validation: field.validation,
+        maxLength: field.maxLength,
+        validationMessage: field.validationErrorMessage
       )
       cellModels.append(cellModel)
     }

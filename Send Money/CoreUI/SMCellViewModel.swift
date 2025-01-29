@@ -28,4 +28,7 @@ protocol SMCellViewModel {
   var placeHolder: String?  { get set }
   var options: [String]?  { get set }
   var selectedValue: String?  { get set }
+  var validation: String?  { get set }
+  var maxLength: Int?  { get set }
+  var validationMessage: String?  { get set }
 }

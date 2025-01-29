@@ -24,7 +24,7 @@ class SendMoneyTextFieldCell: UITableViewCell, SMDynamicCell {
     
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     textField.translatesAutoresizingMaskIntoConstraints = false
-    
+    textField.delegate = self
     contentView.addSubview(titleLabel)
     contentView.addSubview(textField)
     
@@ -53,6 +53,7 @@ class SendMoneyTextFieldCell: UITableViewCell, SMDynamicCell {
   
   func configure(_ dataType: (any SMCellViewModel)?) {
     guard let data = dataType as? SendMoneyCellModel else { return }
+    cellModel = data
     titleLabel.text = data.title
     textField.placeholder = data.placeHolder
     switch data.cellUIType {
@@ -60,6 +61,15 @@ class SendMoneyTextFieldCell: UITableViewCell, SMDynamicCell {
       textField.keyboardType = .numberPad
     default:
       textField.keyboardType = .default
+    }
+    textField.text = data.selectedValue
+  }
+}
+
+extension SendMoneyTextFieldCell: UITextFieldDelegate {
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    if let enteredText = textField.text {
+      cellModel?.selectedValue = enteredText
     }
   }
 }
