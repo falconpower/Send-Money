@@ -32,18 +32,9 @@ class SendMoneyViewController: SMTableViewController<SendMoneyCellModel> {
   
   override func didSelectionOfRow(_ indexPath: IndexPath) {
     guard let selectedCellModel = sendMoneyViewModel?.cellModels[indexPath.row] else { return }
-    selectedIndexPath = indexPath
-    
-    // Determine if the selected row is for service or provider
-    if indexPath.row == 0 {
-      // Service selected, show the service picker
-      isServicePicker = true
-    } else {
-      // Provider selected, show the provider picker
-      isServicePicker = false
-    }
-    
-    showPicker(for: selectedCellModel)
+        selectedIndexPath = indexPath
+
+        showPicker(for: selectedCellModel)
   }
   
   private func setupPickerView() {
@@ -85,18 +76,24 @@ class SendMoneyViewController: SMTableViewController<SendMoneyCellModel> {
   
   @objc private func donePickerSelection() {
     guard let indexPath = selectedIndexPath else { return }
-    
-    if isServicePicker {
-      // Service was selected
-      let selectedService = sendMoneyViewModel?.serviceOptions[pickerView.selectedRow(inComponent: 0)]
-      sendMoneyViewModel?.selectService(selectedService ?? "")
-    } else {
-      // Provider was selected
-      guard let selectedProvider = sendMoneyViewModel?.providerOptions[pickerView.selectedRow(inComponent: 0)] else { return }
-      sendMoneyViewModel?.selectProvider(selectedProvider)
+    let selectedRow = pickerView.selectedRow(inComponent: 0)
+    guard let selectedCellModel = sendMoneyViewModel?.cellModels[indexPath.row],
+          let selectedOption = selectedCellModel.options?[selectedRow] else {
+      return
     }
+    if selectedCellModel.identifier == "service" {
+      sendMoneyViewModel?.selectService(selectedOption)
+    } else if selectedCellModel.identifier == "provider" {
+      sendMoneyViewModel?.selectProvider(selectedOption)
+    }
+    selectedCellModel.selectedValue = selectedOption
     refreshAndReload()
     pickerContainerView.removeFromSuperview()
+  }
+  
+  @objc override func didTapStickyButton() {
+    print("Sticky button tapped", sendMoneyViewModel?.cellDataSource)
+    // Handle button tap action
   }
 }
 
@@ -107,22 +104,20 @@ extension SendMoneyViewController: UIPickerViewDelegate, UIPickerViewDataSource 
   }
   
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    guard let indexPath = selectedIndexPath else { return 0 }
-    
-    if isServicePicker {
-      return sendMoneyViewModel?.serviceOptions.count ?? 0
-    } else {
-      return sendMoneyViewModel?.providerOptions.count ?? 0
-    }
+      guard let indexPath = selectedIndexPath,
+            let selectedCellModel = sendMoneyViewModel?.cellModels[indexPath.row] else {
+          return 0
+      }
+      
+      return selectedCellModel.options?.count ?? 0
   }
   
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    guard let indexPath = selectedIndexPath else { return nil }
-    
-    if isServicePicker {
-      return sendMoneyViewModel?.serviceOptions[row]
-    } else {
-      return sendMoneyViewModel?.providerOptions[row]
-    }
+      guard let indexPath = selectedIndexPath,
+            let selectedCellModel = sendMoneyViewModel?.cellModels[indexPath.row] else {
+          return nil
+      }
+      
+      return selectedCellModel.options?[row]
   }
 }

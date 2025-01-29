@@ -7,21 +7,37 @@
 
 import UIKit
 
-class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SMTableDelegateActions  {
+class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SMTableDelegateActions {
+  
   var viewModel: SMTableViewModel<CellDataType>
+  var primaryButton: String {
+    "Save"
+  }
   lazy var listTableView: UITableView = {
     let table = UITableView()
     table.translatesAutoresizingMaskIntoConstraints = false
     table.separatorStyle = .none
     return table
   }()
+  
   var listDataSource: SMTableDataSource<CellDataType>?
   var listDelegate: SMTableDelegate?
+  
+  // Sticky button at the bottom
+  lazy var stickyButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.setTitle(primaryButton, for: .normal)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.addTarget(self, action: #selector(didTapStickyButton), for: .touchUpInside)
+    return button
+  }()
   
   init(viewModel: SMTableViewModel<CellDataType>) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
+    addStickyButton()
     addTableView()
+   
     configureTable()
   }
   
@@ -39,17 +55,37 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
     listTableView.tableFooterView = UIView()
     listTableView.backgroundColor = UIColor.white
   }
-  // Implemented in child classes
+  
   func registerCells() {
-    
+    // Register custom cells here
   }
+  
   private func addTableView() {
+    self.view.backgroundColor = .white
     self.view.addSubview(listTableView)
     listTableView.translatesAutoresizingMaskIntoConstraints = false
-    listTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: .zero).isActive = true
-    listTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: .zero).isActive = true
-    listTableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: .zero).isActive = true
-    listTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: .zero).isActive = true
+    NSLayoutConstraint.activate([
+      listTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+      listTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+      listTableView.topAnchor.constraint(equalTo: self.view.topAnchor),
+      listTableView.bottomAnchor.constraint(equalTo: stickyButton.topAnchor)
+    ])
+  }
+  
+  // Add sticky button below the table view
+  private func addStickyButton() {
+    self.view.addSubview(stickyButton)
+    NSLayoutConstraint.activate([
+      stickyButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
+      stickyButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
+      stickyButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+      stickyButton.heightAnchor.constraint(equalToConstant: 44)
+    ])
+  }
+  
+  @objc func didTapStickyButton() {
+    print("Sticky button tapped")
+    // Handle button tap action
   }
   
   func refreshAndReload() {
@@ -65,4 +101,3 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
     print("Didselect called")
   }
 }
-

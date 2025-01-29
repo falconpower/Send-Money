@@ -8,10 +8,15 @@
 import Foundation
 
 class SendMoneyViewModel: SMTableViewModel<SendMoneyCellModel> {
-  
+  enum SendMoneyPickerType: String {
+    case service
+    case provider
+    case gender
+  }
   private var services: [Services] = []
   private var selectedService: Services?
   private var selectedProvider: Providers?
+  private var selectedGender: String?
   var cellModels:[SendMoneyCellModel] = []
   var serviceOptions: [String] {
     services.map { $0.label?.en ?? "" }
@@ -20,6 +25,13 @@ class SendMoneyViewModel: SMTableViewModel<SendMoneyCellModel> {
   var providerOptions: [String] {
     selectedService?.providers?.map({ $0.name ?? "" }) ?? []
   }
+  
+  var genderOptions: [String] {
+    selectedProvider?.requiredFields?
+      .first(where: { $0.type == "gender" })?
+      .options?.compactMap { $0.label } ?? []
+  }
+
   
   var requiredFields: [RequiredFields] {
     selectedProvider?.requiredFields ?? []
@@ -50,20 +62,27 @@ class SendMoneyViewModel: SMTableViewModel<SendMoneyCellModel> {
     selectedService = services.first { service in
       service.label?.en == serviceName || service.name == serviceName
     }
+    if let serviceCell = cellModels.first(where: { $0.identifier == SendMoneyPickerType.service.rawValue }) {
+      serviceCell.selectedValue = serviceName
+    }
     selectedProvider = nil
     updateCellModels()
   }
   
   func selectProvider(_ providerName: String) {
     selectedProvider = selectedService?.providers?.first { $0.name == providerName }
+    if let providerCell = cellModels.first(where: { $0.identifier == SendMoneyPickerType.provider.rawValue }) {
+      providerCell.selectedValue = providerName
+    }
     updateCellModels()
   }
+  
   
   private func createServiceTypeDropdownCell() -> SendMoneyCellModel {
     let cellModel = SendMoneyCellModel(
       cellUIType: .option,
       cellProvider: CellProvider(cellType: SendMoneyDropdownCell.self),
-      identifier: "serviceType",  // Field name
+      identifier: SendMoneyPickerType.service.rawValue,  // Field name
       title: "Service",    // Title for the dropdown
       placeHolder: "Choose",
       options: serviceOptions,
@@ -77,7 +96,7 @@ class SendMoneyViewModel: SMTableViewModel<SendMoneyCellModel> {
     let cellModel = SendMoneyCellModel(
       cellUIType: .option,
       cellProvider: CellProvider(cellType: SendMoneyDropdownCell.self),
-      identifier: "providerType",
+      identifier: SendMoneyPickerType.provider.rawValue,
       title: "Provider",
       placeHolder: "Choose",
       options: providerOptions.map { $0.name ?? "" },
@@ -97,10 +116,11 @@ class SendMoneyViewModel: SMTableViewModel<SendMoneyCellModel> {
       guard let type = field.type, let cellType = SMCellType(rawValue: type) else { continue }
       let cellModel = SendMoneyCellModel(
         cellUIType: cellType,
-        cellProvider: CellProvider(cellType: SendMoneyTextFieldCell.self),
+        cellProvider: cellType == .option ?  CellProvider(cellType: SendMoneyDropdownCell.self) : CellProvider(cellType: SendMoneyTextFieldCell.self),
         identifier: field.name,
         title: field.label?.en,
-        placeHolder: field.placeholder
+        placeHolder: field.placeholder,
+        options: field.options?.map({$0.label ?? ""})
       )
       cellModels.append(cellModel)
     }
