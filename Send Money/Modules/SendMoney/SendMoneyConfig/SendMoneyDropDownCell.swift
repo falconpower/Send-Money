@@ -40,7 +40,7 @@ class SendMoneyDropdownCell: UITableViewCell, SMDynamicCell {
     contentView.addSubview(titleLabel)
     textField = UITextField()
     textField.font = UIFont.systemFont(ofSize: 14)
-    textField.textColor = .gray
+    textField.textColor = .black
     textField.isEnabled = false
     textField.textAlignment = .left
     textField.borderStyle = .roundedRect

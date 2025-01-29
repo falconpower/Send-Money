@@ -6,11 +6,9 @@
 //
 
 import UIKit
-
 class SendMoneyTextFieldCell: UITableViewCell, SMDynamicCell, UITextFieldDelegate {
   
   var cellModel: SendMoneyCellModel?
-  
   var titleLabel: UILabel!
   var textField: UITextField!
   var errorLabel: UILabel!
@@ -65,6 +63,7 @@ class SendMoneyTextFieldCell: UITableViewCell, SMDynamicCell, UITextFieldDelegat
   
   func configure(_ dataType: (any SMCellViewModel)?) {
     guard let data = dataType as? SendMoneyCellModel else { return }
+    selectionStyle = .none
     cellModel = data
     titleLabel.text = data.title
     textField.placeholder = data.placeHolder
@@ -80,33 +79,38 @@ class SendMoneyTextFieldCell: UITableViewCell, SMDynamicCell, UITextFieldDelegat
   
   func textFieldDidEndEditing(_ textField: UITextField) {
     if let enteredText = textField.text {
-      validateText(enteredText)
-      cellModel?.selectedValue = enteredText
+      if validateText(enteredText) {
+        cellModel?.selectedValue = enteredText
+      }
     }
-  
+    
+    TextValidationReducer.shared.store?.dispatch(action: TextValidationAction(isValid: errorLabel.isHidden, actionType: .validate, cellModel: cellModel))
   }
   
-  private func validateText(_ text: String?) {
+  private func validateText(_ text: String?) -> Bool {
     errorLabel.isHidden = true
-    
     if let maxLength = cellModel?.maxLength, let text = text {
       if text.count > maxLength {
         errorLabel.text = "Text exceeds maximum length of \(maxLength) characters."
         errorLabel.isHidden = false
-        return
+        return false
       }
     }
-    
     if let validationRegex = cellModel?.validation, let text = text {
       let regex = try? NSRegularExpression(pattern: validationRegex)
       let range = NSRange(location: 0, length: text.utf16.count)
       if regex?.firstMatch(in: text, options: [], range: range) == nil {
         errorLabel.text = cellModel?.validationMessage ?? "Invalid input format."
         errorLabel.isHidden = false
-        return
+        return false
       }
     }
-    
-    errorLabel.isHidden = true
+    return true
+  }
+  
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder() // Dismiss the keyboard
+    return true
   }
 }

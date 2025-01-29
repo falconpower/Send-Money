@@ -24,8 +24,8 @@
               "name": "amount",
               "placeholder": "0.00",
               "type": "number",
-              "validation": "",
-              "max_length": 0,
+              "validation": "^[0-9]*\\.?[0-9]+$",
+              "max_length": 10,
               "validation_error_message": "Amount is required"
             },
             {
@@ -78,8 +78,8 @@
               "name": "amount",
               "placeholder": "0.00",
               "type": "number",
-              "validation": "",
-              "max_length": 0,
+              "validation": "^[0-9]*\\.?[0-9]+$",
+              "max_length": 10,
               "validation_error_message": "Amount is required"
             },
             {
@@ -142,8 +142,8 @@
               "name": "amount",
               "placeholder": "0.00",
               "type": "number",
-              "validation": "",
-              "max_length": 0,
+              "validation": "^[0-9]*\\.?[0-9]+$",
+              "max_length": 10,
               "validation_error_message": "Amount is required"
             },
             {
@@ -206,8 +206,8 @@
               "name": "amount",
               "placeholder": "0.00",
               "type": "number",
-              "validation": "",
-              "max_length": 0,
+              "validation": "^[0-9]*\\.?[0-9]+$",
+              "max_length": 10,
               "validation_error_message": "Amount is required"
             },
             {
@@ -270,8 +270,8 @@
               "name": "amount",
               "placeholder": "0.00",
               "type": "number",
-              "validation": "",
-              "max_length": 0,
+              "validation": "^[0-9]*\\.?[0-9]+$",
+              "max_length": 10,
               "validation_error_message": "Amount is required"
             },
             {
@@ -321,8 +321,8 @@
               "name": "amount",
               "placeholder": "0.00",
               "type": "number",
-              "validation": "",
-              "max_length": 0,
+              "validation": "^[0-9]*\\.?[0-9]+$",
+              "max_length": 10,
               "validation_error_message": "Amount is required"
             }
           ]

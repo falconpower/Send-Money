@@ -32,9 +32,12 @@ class SendMoneyViewController: SMTableViewController<SendMoneyCellModel> {
   
   override func didSelectionOfRow(_ indexPath: IndexPath) {
     guard let selectedCellModel = sendMoneyViewModel?.cellModels[indexPath.row] else { return }
-        selectedIndexPath = indexPath
-
-        showPicker(for: selectedCellModel)
+    if (selectedCellModel.cellUIType != .freeText) &&
+        (selectedCellModel.cellUIType != .numberText) {
+      selectedIndexPath = indexPath
+      
+      showPicker(for: selectedCellModel)
+    }
   }
   
   private func setupPickerView() {
@@ -89,6 +92,7 @@ class SendMoneyViewController: SMTableViewController<SendMoneyCellModel> {
     selectedCellModel.selectedValue = selectedOption
     refreshAndReload()
     pickerContainerView.removeFromSuperview()
+    TextValidationReducer.shared.store?.dispatch(action: TextValidationAction(isValid: true, actionType: .validate, cellModel: selectedCellModel))
   }
   
   @objc override func didTapStickyButton() {
