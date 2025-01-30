@@ -4,8 +4,10 @@
 //
 //  Created by Pratheesh Bennet on 29/01/25.
 //
+import UIKit
 
 class SendMoneyCellModel: SMCellViewModel {
+  var height: CGFloat?
   typealias Cell = SendMoneyDropdownCell
   var validation: String?
   var maxLength: Int?
@@ -17,6 +19,8 @@ class SendMoneyCellModel: SMCellViewModel {
   var identifier: String?
   var options: [String]?
   var selectedValue: String?
+  var buttonAction: (() -> Void)?
+  var capturedString: ((String) -> Void)?
   init(cellUIType: SMCellType,
        cellProvider: CellProvider,
        identifier: String? = nil,
@@ -26,7 +30,11 @@ class SendMoneyCellModel: SMCellViewModel {
        selectedValue: String? = nil,
        validation: String? = nil,
        maxLength: Int? = nil,
-       validationMessage: String? = nil) {
+       validationMessage: String? = nil,
+       height: CGFloat? = nil,
+       buttonAction: (() -> Void)? = nil,
+       capturedString: ((String) -> Void)? = nil
+  ) {
     self.cellUIType = cellUIType
     self.cellProvider = cellProvider
     self.identifier = identifier
@@ -37,6 +45,9 @@ class SendMoneyCellModel: SMCellViewModel {
     self.validation = validation
     self.maxLength = maxLength
     self.validationMessage = validationMessage
+    self.height = height
+    self.buttonAction = buttonAction
+    self.capturedString = capturedString
   }
 }
 

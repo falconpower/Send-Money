@@ -61,7 +61,12 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
   }
   
   func registerCells() {
-    // Register custom cells here
+    listTableView.register(SendMoneyDropdownCell.self, forCellReuseIdentifier: String(describing: SendMoneyDropdownCell.self))
+    listTableView.register(SendMoneyTextFieldCell.self, forCellReuseIdentifier: String(describing: SendMoneyTextFieldCell.self))
+    listTableView.register(ButtonCell.self, forCellReuseIdentifier: String(describing: ButtonCell.self))
+    listTableView.register(SpacerCell.self, forCellReuseIdentifier: String(describing: SpacerCell.self))
+    listTableView.register(SubtitleCell.self, forCellReuseIdentifier: String(describing: SubtitleCell.self))
+    listTableView.register(TitleCell.self, forCellReuseIdentifier: String(describing: TitleCell.self))
   }
   
   private func addTableView() {
@@ -76,7 +81,6 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
     ])
   }
   
-  // Add sticky button below the table view
   private func addStickyButton() {
     self.view.addSubview(stickyButton)
     NSLayoutConstraint.activate([
@@ -89,7 +93,6 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
   
   @objc func didTapStickyButton() {
     print("Sticky button tapped")
-    // Handle button tap action
   }
   
   func refreshAndReload() {

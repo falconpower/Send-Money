@@ -129,4 +129,10 @@ class SendMoneyViewModel: SMTableViewModel<SendMoneyCellModel> {
     }
     cellDataSource = [cellModels]
   }
+  
+  func saveDetails() {
+    if let cellDataSource {
+      LocalStorage.cellDataSource.append(cellDataSource)
+    }
+  }
 }

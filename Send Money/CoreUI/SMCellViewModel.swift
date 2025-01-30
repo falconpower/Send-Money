@@ -13,9 +13,11 @@ enum SMCellType: String, Codable {
   case option = "option"
   case numberText = "number"
   case freeText = "text"
+  case password
   case spacer
   case primaryButton
   case disclaimerText
+  case displayCard
 }
 struct CellProvider {
   var cellType: UITableViewCell.Type
@@ -31,4 +33,5 @@ protocol SMCellViewModel {
   var validation: String?  { get set }
   var maxLength: Int?  { get set }
   var validationMessage: String?  { get set }
+  var height: CGFloat? { get set }
 }

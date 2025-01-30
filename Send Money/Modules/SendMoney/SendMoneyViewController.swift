@@ -1,15 +1,18 @@
-import UIKit
+//
+//  SendMoneyViewController.swift
+//  Send Money
+//
+//  Created by Pratheesh Bennet on 29/01/25.
+//
+
 import UIKit
 
 class SendMoneyViewController: SMTableViewController<SendMoneyCellModel> {
-  
   var sendMoneyViewModel: SendMoneyViewModel? {
     return viewModel as? SendMoneyViewModel
   }
-  
   private let pickerView = UIPickerView()
   private var selectedIndexPath: IndexPath?
-  private var isServicePicker = true // Flag to distinguish between service and provider picker
   private let pickerContainerView: UIView = {
     let view = UIView()
     view.backgroundColor = .white
@@ -19,15 +22,11 @@ class SendMoneyViewController: SMTableViewController<SendMoneyCellModel> {
   init(viewModel: SendMoneyViewModel) {
     super.init(viewModel: viewModel)
     setupPickerView()
+    self.title = "Send Money Details"
   }
   
-  @MainActor required init?(coder: NSCoder) {
+  required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }
-  
-  override func registerCells() {
-    listTableView.register(SendMoneyDropdownCell.self, forCellReuseIdentifier: String(describing: SendMoneyDropdownCell.self))
-    listTableView.register(SendMoneyTextFieldCell.self, forCellReuseIdentifier: String(describing: SendMoneyTextFieldCell.self))
   }
   
   override func didSelectionOfRow(_ indexPath: IndexPath) {
@@ -84,9 +83,9 @@ class SendMoneyViewController: SMTableViewController<SendMoneyCellModel> {
           let selectedOption = selectedCellModel.options?[selectedRow] else {
       return
     }
-    if selectedCellModel.identifier == "service" {
+    if selectedCellModel.identifier == SendMoneyViewModel.SendMoneyPickerType.service.rawValue {
       sendMoneyViewModel?.selectService(selectedOption)
-    } else if selectedCellModel.identifier == "provider" {
+    } else if selectedCellModel.identifier == SendMoneyViewModel.SendMoneyPickerType.provider.rawValue {
       sendMoneyViewModel?.selectProvider(selectedOption)
     }
     selectedCellModel.selectedValue = selectedOption
@@ -97,7 +96,8 @@ class SendMoneyViewController: SMTableViewController<SendMoneyCellModel> {
   
   @objc override func didTapStickyButton() {
     print("Sticky button tapped", sendMoneyViewModel?.cellDataSource)
-    // Handle button tap action
+    sendMoneyViewModel?.saveDetails()
+    self.navigationController?.popViewController(animated: true)
   }
 }
 

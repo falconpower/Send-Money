@@ -67,6 +67,7 @@ class SendMoneyTextFieldCell: UITableViewCell, SMDynamicCell, UITextFieldDelegat
     cellModel = data
     titleLabel.text = data.title
     textField.placeholder = data.placeHolder
+    textField.isSecureTextEntry = data.cellUIType == .password ? true : false
     switch data.cellUIType {
     case .numberText:
       textField.keyboardType = .numberPad
@@ -81,9 +82,9 @@ class SendMoneyTextFieldCell: UITableViewCell, SMDynamicCell, UITextFieldDelegat
     if let enteredText = textField.text {
       if validateText(enteredText) {
         cellModel?.selectedValue = enteredText
+        cellModel?.capturedString?(enteredText)
       }
     }
-    
     TextValidationReducer.shared.store?.dispatch(action: TextValidationAction(isValid: errorLabel.isHidden, actionType: .validate, cellModel: cellModel))
   }
   
