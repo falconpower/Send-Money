@@ -65,10 +65,10 @@ class LoginViewModel: SMTableViewModel<SendMoneyCellModel> {
       placeHolder: "email".localized,
       validation: ".*",
       maxLength: 40,
-      validationMessage: "Please enter valid email") { [weak self ]capturedValue in
+      validationMessage: "Please enter valid email", capturedString:  { [weak self ]capturedValue in
         self?.enteredUsername = capturedValue
         print(capturedValue)
-      }
+      })
     
     let password =  SendMoneyCellModel(
       cellUIType: .password,
@@ -78,9 +78,9 @@ class LoginViewModel: SMTableViewModel<SendMoneyCellModel> {
       placeHolder: "password".localized,
       validation: ".*",
       maxLength: 40,
-      validationMessage: "") { [weak self] capturedValue in
+      validationMessage: "", capturedString:  { [weak self] capturedValue in
         self?.enteredPassword = capturedValue
-      }
+      })
     
     let spacer4 = SendMoneyCellModel(
       cellUIType: .spacer,

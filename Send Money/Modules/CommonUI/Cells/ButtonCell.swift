@@ -30,7 +30,7 @@ class ButtonCell: UITableViewCell, SMDynamicCell {
   private func setupUI() {
     selectionStyle = .none
     actionButton = UIButton(type: .system)
-    actionButton.setTitle("Button", for: .normal)
+    actionButton.setTitle("", for: .normal)
     actionButton.setTitleColor(.white, for: .normal)
     actionButton.backgroundColor = .systemBlue
     actionButton.layer.cornerRadius = 8
@@ -41,11 +41,10 @@ class ButtonCell: UITableViewCell, SMDynamicCell {
   
   @objc private func didTapButton() {
     cellModel?.buttonAction?()
-    }
+  }
 
   private func setupConstraints() {
     actionButton.translatesAutoresizingMaskIntoConstraints = false
-
     NSLayoutConstraint.activate([
       actionButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
       actionButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),

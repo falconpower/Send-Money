@@ -25,4 +25,5 @@
 "invalidCredentialsMessage" = "Invalid username or password.";
 "okButton" = "OK";
 "maxCharacter" = "Max character";
+"invalidInputFormat" = "Invalid input format.";
 

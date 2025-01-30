@@ -18,7 +18,6 @@ class SMTableDataSource<CellDataType: SMCellViewModel>: NSObject, SMTableViewCon
   var screenTitle: String?
   var dataSource: [[CellDataType]]?
   
-  //var configurator: SMCellConfigurator<CellDataType>?
   init(dataSource: [[CellDataType]]) {
     self.dataSource = dataSource
   }

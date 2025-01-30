@@ -32,7 +32,6 @@ class SendMoneyViewModel: SMTableViewModel<SendMoneyCellModel> {
       .options?.compactMap { $0.label } ?? []
   }
 
-  
   var requiredFields: [RequiredFields] {
     selectedProvider?.requiredFields ?? []
   }
@@ -52,11 +51,9 @@ class SendMoneyViewModel: SMTableViewModel<SendMoneyCellModel> {
         updateCellModels()
       }
     } catch {
-      // Handle error
       print("Error loading or decoding JSON: \(error.localizedDescription)")
     }
   }
-  
   
   func selectService(_ serviceName: String) {
     selectedService = services.first { service in

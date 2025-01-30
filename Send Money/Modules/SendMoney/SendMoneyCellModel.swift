@@ -8,7 +8,6 @@ import UIKit
 
 class SendMoneyCellModel: SMCellViewModel {
   var height: CGFloat?
-  typealias Cell = SendMoneyDropdownCell
   var validation: String?
   var maxLength: Int?
   var validationMessage: String?

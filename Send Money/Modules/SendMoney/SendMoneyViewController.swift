@@ -103,7 +103,7 @@ class SendMoneyViewController: SMTableViewController<SendMoneyCellModel> {
   override func reloadUIForLanguageChange() {
     super.reloadUIForLanguageChange()
     view.setNeedsLayout()
-      view.layoutIfNeeded()
+    view.layoutIfNeeded()
     self.title = "sendMoneyDetails".localized
     stickyButton.setTitle(primaryButton, for: .normal)
     sendMoneyViewModel?.fetchData()
@@ -118,20 +118,20 @@ extension SendMoneyViewController: UIPickerViewDelegate, UIPickerViewDataSource 
   }
   
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-      guard let indexPath = selectedIndexPath,
-            let selectedCellModel = sendMoneyViewModel?.cellModels[indexPath.row] else {
-          return 0
-      }
-      
-      return selectedCellModel.options?.count ?? 0
+    guard let indexPath = selectedIndexPath,
+          let selectedCellModel = sendMoneyViewModel?.cellModels[indexPath.row] else {
+      return 0
+    }
+    
+    return selectedCellModel.options?.count ?? 0
   }
   
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-      guard let indexPath = selectedIndexPath,
-            let selectedCellModel = sendMoneyViewModel?.cellModels[indexPath.row] else {
-          return nil
-      }
-      
-      return selectedCellModel.options?[row]
+    guard let indexPath = selectedIndexPath,
+          let selectedCellModel = sendMoneyViewModel?.cellModels[indexPath.row] else {
+      return nil
+    }
+    
+    return selectedCellModel.options?[row]
   }
 }

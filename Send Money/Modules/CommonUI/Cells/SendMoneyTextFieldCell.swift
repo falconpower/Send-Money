@@ -118,7 +118,7 @@ class SendMoneyTextFieldCell: UITableViewCell, SMDynamicCell, UITextFieldDelegat
       let regex = try? NSRegularExpression(pattern: validationRegex)
       let range = NSRange(location: 0, length: text.utf16.count)
       if regex?.firstMatch(in: text, options: [], range: range) == nil {
-        errorLabel.text = cellModel?.validationMessage ?? "Invalid input format."
+        errorLabel.text = cellModel?.validationMessage ?? "invalidInputFormat".localized
         errorLabel.isHidden = false
         return false
       }
@@ -126,9 +126,8 @@ class SendMoneyTextFieldCell: UITableViewCell, SMDynamicCell, UITextFieldDelegat
     return true
   }
   
-  
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    textField.resignFirstResponder() // Dismiss the keyboard
+    textField.resignFirstResponder()
     return true
   }
 }

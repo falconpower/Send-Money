@@ -39,8 +39,6 @@ class LoginViewController: SMTableViewController<SendMoneyCellModel> {
   }
   
   private func navigateToMainScreen() {
-//    let viewModel = SendMoneyViewModel()
-//    let viewController = SendMoneyViewController(viewModel: viewModel)
     let viewController = SendMoneyListViewController()
     navigationController?.pushViewController(viewController, animated: true)
   }

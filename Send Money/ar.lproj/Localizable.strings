@@ -25,6 +25,7 @@
 "invalidCredentialsMessage" = "اسم المستخدم أو كلمة المرور غير صحيحة.";
 "okButton" = "حسناً";
 "maxCharacter" = "أقصى عدد من الأحرف";
+"invalidInputFormat" = "تنسيق الإدخال غير صالح.";
 
 
 

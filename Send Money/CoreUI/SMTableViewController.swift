@@ -31,7 +31,6 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
   var listDataSource: SMTableDataSource<CellDataType>?
   var listDelegate: SMTableDelegate?
   
-  // Sticky button at the bottom
   lazy var stickyButton: UIButton = {
     let button = UIButton(type: .system)
     button.isEnabled = false
@@ -107,6 +106,7 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
     ])
   }
   
+  // To be overriden by child classes
   @objc func didTapStickyButton() {
     print("Sticky button tapped")
   }
@@ -120,6 +120,7 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
     listTableView.reloadData()
   }
   
+  //Overrider by child class
   func didSelectionOfRow(_ indexPath: IndexPath) {
     print("Didselect called")
   }
@@ -128,7 +129,6 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
   }
@@ -158,11 +158,6 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
   }
   
   func reloadUIForLanguageChange() {
-    if let window = UIApplication.shared.keyWindow {
-      let rootVC = window.rootViewController
-      window.rootViewController = nil
-      window.rootViewController = rootVC
-    }
     reload()
   }
   @objc func languageSegmentChanged(sender: UISegmentedControl) {
