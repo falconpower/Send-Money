@@ -39,6 +39,7 @@ class SendMoneyTextFieldCell: UITableViewCell, SMDynamicCell, UITextFieldDelegat
     textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 0))
     textField.leftViewMode = .always
     textField.delegate = self
+    textField.autocapitalizationType = .none
     let toolbar = UIToolbar()
     toolbar.sizeToFit()
     let doneButton = UIBarButtonItem(title: "done".localized, style: .done, target: self, action: #selector(dismissKeyboard))

@@ -63,7 +63,7 @@ class LoginViewModel: SMTableViewModel<SendMoneyCellModel> {
       identifier: "email",
       title: "email".localized,
       placeHolder: "email".localized,
-      validation: "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+      validation: ".*",
       maxLength: 40,
       validationMessage: "Please enter valid email") { [weak self ]capturedValue in
         self?.enteredUsername = capturedValue
@@ -112,8 +112,8 @@ class LoginViewModel: SMTableViewModel<SendMoneyCellModel> {
       loginStatusPublisher.send(false)
       return
     }
-    let validUsername = "Test@test.com"
-    let validPassword = "123"
+    let validUsername = "testuser"
+    let validPassword = "password123"
     if username == validUsername && password == validPassword {
       loginStatusPublisher.send(true)
     } else {
