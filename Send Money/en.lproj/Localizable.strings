@@ -24,4 +24,5 @@
 "loginFailedTitle" = "Login Failed";
 "invalidCredentialsMessage" = "Invalid username or password.";
 "okButton" = "OK";
+"maxCharacter" = "Max character";
 

@@ -108,7 +108,7 @@ class SendMoneyTextFieldCell: UITableViewCell, SMDynamicCell, UITextFieldDelegat
     errorLabel.isHidden = true
     if let maxLength = cellModel?.maxLength, let text = text {
       if text.count > maxLength {
-        errorLabel.text = "Text exceeds maximum length of \(maxLength) characters."
+        errorLabel.text = "\("maxCharacter".localized):\(maxLength)"
         errorLabel.isHidden = false
         return false
       }
