@@ -16,3 +16,6 @@
 "choose" = "Choose";
 "service" = "Service";
 "provider" = "Provider";
+"serviceName" = "Service Name";
+"providerName" = "Provider Name";
+"amount" = "Amount";

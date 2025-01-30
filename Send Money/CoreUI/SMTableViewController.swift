@@ -49,6 +49,7 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: languageSegmentedControl)
+    navigationItem.backButtonTitle = ""
     addStickyButton()
     addTableView()
     configureTable()

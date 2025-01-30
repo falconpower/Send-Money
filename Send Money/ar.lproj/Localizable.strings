@@ -5,6 +5,7 @@
   Created by Pratheesh Bennet on 30/01/25.
   
 */
+"sendMoneyApp" = "تطبيق إرسال الأموال";
 "welcomToSendMoneyApp" = "مرحبًا بك في تطبيق إرسال الأموال";
 "email" = "البريد الإلكتروني";
 "password" = "كلمة المرور";
@@ -15,4 +16,8 @@
 "choose" = "اختار";
 "service" = "خدمة";
 "provider" = "مزود الخدمة";
+"serviceName" = "اسم الخدمة";
+"providerName" = "اسم المزود";
+"amount" = "المبلغ";
+
 

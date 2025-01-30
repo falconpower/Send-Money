@@ -16,7 +16,6 @@ class ViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
-    let vm = LoginViewModel()
     let vc = SendMoneyListViewController()
     self.navigationController?.pushViewController(vc, animated: true)
   }

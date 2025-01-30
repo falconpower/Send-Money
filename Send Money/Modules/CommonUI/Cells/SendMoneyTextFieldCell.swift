@@ -71,6 +71,7 @@ class SendMoneyTextFieldCell: UITableViewCell, SMDynamicCell, UITextFieldDelegat
   
   func configure(_ dataType: (any SMCellViewModel)?) {
     guard let data = dataType as? SendMoneyCellModel else { return }
+    errorLabel.isHidden = true
     selectionStyle = .none
     cellModel = data
     titleLabel.text = data.title

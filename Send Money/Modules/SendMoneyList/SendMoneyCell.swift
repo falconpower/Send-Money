@@ -32,11 +32,13 @@ class SendMoneyCell: UITableViewCell {
     serviceNameLabel.font = UIFont.systemFont(ofSize: 14)
     providerNameLabel.font = UIFont.systemFont(ofSize: 14)
     amountLabel.font = UIFont.systemFont(ofSize: 14)
-    
+    let isRTL = LanguageManager.shared.currentLanguage.hasPrefix("ar")
     [requestIdLabel, serviceNameLabel, providerNameLabel, amountLabel].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       $0.numberOfLines = 1
       $0.textColor = .black
+      $0.textAlignment = isRTL ? .right : .left
+      $0.semanticContentAttribute = isRTL ? .forceRightToLeft : .forceLeftToRight
     }
     
     // Configure stackView
@@ -62,11 +64,11 @@ class SendMoneyCell: UITableViewCell {
       case "requestId":
         requestIdLabel.text = "Request ID: \(model.selectedValue ?? "")"
       case "service":
-        serviceNameLabel.text = "Service Name: \(model.selectedValue ?? "")"
+        serviceNameLabel.text = "\("serviceName".localized): \(model.selectedValue ?? "")"
       case "provider":
-        providerNameLabel.text = "Provider Name: \(model.selectedValue ?? "")"
+        providerNameLabel.text = "\("providerName".localized): \(model.selectedValue ?? "")"
       case "amount":
-        amountLabel.text = "Amount: \(model.selectedValue ?? "")"
+        amountLabel.text = "\("amount".localized): \(model.selectedValue ?? "")"
       default:
         break
       }
