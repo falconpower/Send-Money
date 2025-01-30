@@ -39,7 +39,13 @@ class SendMoneyTextFieldCell: UITableViewCell, SMDynamicCell, UITextFieldDelegat
     textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 0))
     textField.leftViewMode = .always
     textField.delegate = self
+    let toolbar = UIToolbar()
+    toolbar.sizeToFit()
+    let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissKeyboard))
+    let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
     
+    toolbar.setItems([flexibleSpace, doneButton], animated: false)
+    textField.inputAccessoryView = toolbar
     NSLayoutConstraint.activate([
       titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
       titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -56,7 +62,9 @@ class SendMoneyTextFieldCell: UITableViewCell, SMDynamicCell, UITextFieldDelegat
       errorLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
     ])
   }
-  
+  @objc func dismissKeyboard() {
+    textField.resignFirstResponder()
+  }
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

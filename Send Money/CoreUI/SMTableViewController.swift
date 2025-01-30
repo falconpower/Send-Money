@@ -29,6 +29,10 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
     button.isEnabled = false
     button.setTitle(primaryButton, for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
+    button.setTitleColor(.white, for: .normal)
+    button.backgroundColor = .systemBlue
+    button.layer.cornerRadius = 8
+    button.alpha = 0.5
     button.addTarget(self, action: #selector(didTapStickyButton), for: .touchUpInside)
     return button
   }()
@@ -108,7 +112,6 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
     print("Didselect called")
   }
   
-  // MARK: - Keyboard Handling
   private var keyboardHeight: CGFloat = 0
   
   override func viewDidLoad() {
@@ -153,7 +156,7 @@ extension SMTableViewController: StoreSubscriber {
     var isValid = false
     for data in viewModel.cellDataSource?.flatMap({ $0 }) ?? [] {
       if let sendMoneyModel = data as? SendMoneyCellModel {
-        if sendMoneyModel.identifier != "service" && sendMoneyModel.identifier != "provider" {
+        if sendMoneyModel.identifier != SendMoneyViewModel.SendMoneyPickerType.service.rawValue && sendMoneyModel.identifier != SendMoneyViewModel.SendMoneyPickerType.provider.rawValue {
           if sendMoneyModel.selectedValue?.isEmpty ?? true {
             isValid = false
             break
@@ -164,5 +167,6 @@ extension SMTableViewController: StoreSubscriber {
       }
     }
     stickyButton.isEnabled = isValid
+    stickyButton.alpha = isValid ? 1.0 : 0.5
   }
 }
