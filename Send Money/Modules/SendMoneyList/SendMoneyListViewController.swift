@@ -20,7 +20,7 @@ class SendMoneyListViewController: UIViewController {
   }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
-    self.title = "Send Money"
+    self.title = "Send Money Request"
     tableView.reloadData()
   }
   
