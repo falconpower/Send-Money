@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  Send Money
+
+  Created by Pratheesh Bennet on 30/01/25.
+  
+*/
+"welcomToSendMoneyApp" = "مرحبًا بك في تطبيق إرسال الأموال";
+"email" = "البريد الإلكتروني";
+"password" = "كلمة المرور";
+"signIn" = "تسجيل الدخول";
+"sendMoneyDetails" = "تفاصيل إرسال الأموال";
+"sendMoneyRequest" = "طلب إرسال الأموال";
+"save" = "حفظ";
+"choose" = "اختار";
+"service" = "خدمة";
+"provider" = "مزود الخدمة";
+

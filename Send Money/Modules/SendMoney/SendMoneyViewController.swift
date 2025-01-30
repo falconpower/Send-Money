@@ -22,7 +22,7 @@ class SendMoneyViewController: SMTableViewController<SendMoneyCellModel> {
   init(viewModel: SendMoneyViewModel) {
     super.init(viewModel: viewModel)
     setupPickerView()
-    self.title = "Send Money Details"
+    self.title = "sendMoneyRequest".localized
   }
   
   required init?(coder: NSCoder) {
@@ -98,6 +98,16 @@ class SendMoneyViewController: SMTableViewController<SendMoneyCellModel> {
     print("Sticky button tapped", sendMoneyViewModel?.cellDataSource)
     sendMoneyViewModel?.saveDetails()
     self.navigationController?.popViewController(animated: true)
+  }
+  
+  override func reloadUIForLanguageChange() {
+    super.reloadUIForLanguageChange()
+    view.setNeedsLayout()
+      view.layoutIfNeeded()
+    self.title = "sendMoneyDetails".localized
+    stickyButton.setTitle(primaryButton, for: .normal)
+    sendMoneyViewModel?.fetchData()
+    refreshAndReload()
   }
 }
 

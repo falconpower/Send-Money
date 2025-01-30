@@ -9,11 +9,24 @@ struct Title: Codable {
     var en: String?
     var ar: String?
 }
+extension Title {
+  var localized: String {
+    switch LanguageManager.shared.currentLanguage {
+    case "ar":
+      return ar ?? en ?? ""
+    default:
+      return en ?? ar ?? ""
+    }
+  }
+}
 
 struct Services: Codable {
-    var label: Title?
-    var name: String?
-    var providers: [Providers]?
+  var label: Title?
+  var name: String?
+  var providers: [Providers]?
+  var localizedLabel: String {
+    return label?.localized ?? ""
+  }
 }
 
 struct Providers: Codable {

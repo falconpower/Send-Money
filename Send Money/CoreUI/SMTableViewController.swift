@@ -11,13 +11,21 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
   
   var viewModel: SMTableViewModel<CellDataType>
   var primaryButton: String {
-    "Save"
+    "save".localized
   }
   lazy var listTableView: UITableView = {
     let table = UITableView()
     table.translatesAutoresizingMaskIntoConstraints = false
     table.separatorStyle = .none
     return table
+  }()
+  
+  lazy var languageSegmentedControl: UISegmentedControl = {
+    let segmentedControl = UISegmentedControl(items: ["English", "عربي"])
+    segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+    segmentedControl.selectedSegmentIndex = LanguageManager.shared.getCurrentLanguage() == "ar" ? 1 : 0
+    segmentedControl.addTarget(self, action: #selector(languageSegmentChanged), for: .valueChanged)
+    return segmentedControl
   }()
   
   var listDataSource: SMTableDataSource<CellDataType>?
@@ -40,6 +48,7 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
   init(viewModel: SMTableViewModel<CellDataType>) {
     self.viewModel = viewModel
     super.init(nibName: nil, bundle: nil)
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: languageSegmentedControl)
     addStickyButton()
     addTableView()
     configureTable()
@@ -47,7 +56,7 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
   }
   private func configureRedux() {
     TextValidationReducer.shared.store?.subscribe(self)
-    }
+  }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
@@ -143,6 +152,23 @@ class SMTableViewController<CellDataType: SMCellViewModel>: UIViewController, SM
     let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
     listTableView.contentInset = contentInset
     listTableView.scrollIndicatorInsets = contentInset
+  }
+  
+  func reloadUIForLanguageChange() {
+    if let window = UIApplication.shared.keyWindow {
+      let rootVC = window.rootViewController
+      window.rootViewController = nil
+      window.rootViewController = rootVC
+    }
+    reload()
+  }
+  @objc func languageSegmentChanged(sender: UISegmentedControl) {
+    let languageCode = sender.selectedSegmentIndex == 0 ? "en" : "ar"
+    LanguageManager.shared.setLanguage(languageCode: languageCode)
+    languagechanged()
+  }
+  func languagechanged() {
+    reloadUIForLanguageChange()
   }
 }
 

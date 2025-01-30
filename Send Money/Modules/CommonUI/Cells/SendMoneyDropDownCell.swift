@@ -24,12 +24,16 @@ class SendMoneyDropdownCell: UITableViewCell, SMDynamicCell {
   func configure(_ dataType: (any SMCellViewModel)?) {
     guard let dataType = dataType as? SendMoneyCellModel else { return }
     cellModel = dataType
-    titleLabel.text = dataType.title
+    titleLabel.text = dataType.title?.localized
     if let selectedValue = dataType.selectedValue {
       textField.text = selectedValue
     } else {
-      textField.text = "Choose"
+      textField.text = "choose".localized
     }
+    let isRTL = LanguageManager.shared.currentLanguage.hasPrefix("ar")
+    titleLabel.textAlignment = isRTL ? .right : .left
+    textField.textAlignment = isRTL ? .right : .left
+    contentView.semanticContentAttribute = isRTL ? .forceRightToLeft : .forceLeftToRight
   }
   
   private func setupUI() {
@@ -63,6 +67,7 @@ class SendMoneyDropdownCell: UITableViewCell, SMDynamicCell {
     NSLayoutConstraint.activate([
       titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
       titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+      titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
       textField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
       textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
       textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),

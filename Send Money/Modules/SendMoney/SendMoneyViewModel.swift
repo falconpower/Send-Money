@@ -19,7 +19,7 @@ class SendMoneyViewModel: SMTableViewModel<SendMoneyCellModel> {
   private var selectedGender: String?
   var cellModels:[SendMoneyCellModel] = []
   var serviceOptions: [String] {
-    services.map { $0.label?.en ?? "" }
+    services.map { $0.localizedLabel }
   }
   
   var providerOptions: [String] {
@@ -42,7 +42,7 @@ class SendMoneyViewModel: SMTableViewModel<SendMoneyCellModel> {
     fetchData()
   }
   
-  private func fetchData() {
+  func fetchData() {
     do {
       if let path = Bundle.main.path(forResource: "sendmoney", ofType: "json"),
          let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
@@ -60,7 +60,7 @@ class SendMoneyViewModel: SMTableViewModel<SendMoneyCellModel> {
   
   func selectService(_ serviceName: String) {
     selectedService = services.first { service in
-      service.label?.en == serviceName || service.name == serviceName
+      service.localizedLabel == serviceName || service.name == serviceName
     }
     if let serviceCell = cellModels.first(where: { $0.identifier == SendMoneyPickerType.service.rawValue }) {
       serviceCell.selectedValue = serviceName
@@ -82,11 +82,11 @@ class SendMoneyViewModel: SMTableViewModel<SendMoneyCellModel> {
     let cellModel = SendMoneyCellModel(
       cellUIType: .option,
       cellProvider: CellProvider(cellType: SendMoneyDropdownCell.self),
-      identifier: SendMoneyPickerType.service.rawValue,  // Field name
-      title: "Service",    // Title for the dropdown
-      placeHolder: "Choose",
+      identifier: SendMoneyPickerType.service.rawValue,
+      title: "service".localized,   
+      placeHolder: "choose".localized,
       options: serviceOptions,
-      selectedValue: selectedService?.label?.en
+      selectedValue: selectedService?.localizedLabel
     )
     return cellModel
   }
@@ -97,8 +97,8 @@ class SendMoneyViewModel: SMTableViewModel<SendMoneyCellModel> {
       cellUIType: .option,
       cellProvider: CellProvider(cellType: SendMoneyDropdownCell.self),
       identifier: SendMoneyPickerType.provider.rawValue,
-      title: "Provider",
-      placeHolder: "Choose",
+      title: "provider".localized,
+      placeHolder: "choose".localized,
       options: providerOptions.map { $0.name ?? "" },
       selectedValue: selectedProvider?.name
     )
@@ -118,7 +118,7 @@ class SendMoneyViewModel: SMTableViewModel<SendMoneyCellModel> {
         cellUIType: cellType,
         cellProvider: cellType == .option ?  CellProvider(cellType: SendMoneyDropdownCell.self) : CellProvider(cellType: SendMoneyTextFieldCell.self),
         identifier: field.name,
-        title: field.label?.en,
+        title: field.label?.localized,
         placeHolder: field.placeholder,
         options: field.options?.map({$0.label ?? ""}),
         validation: field.validation,

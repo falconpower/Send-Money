@@ -10,7 +10,7 @@ import Combine
 
 class LoginViewController: SMTableViewController<SendMoneyCellModel> {
   private var cancellables = Set<AnyCancellable>()
-  var sendMoneyViewModel: LoginViewModel? {
+  var loginViewModel: LoginViewModel? {
     return viewModel as? LoginViewModel
   }
   
@@ -25,8 +25,8 @@ class LoginViewController: SMTableViewController<SendMoneyCellModel> {
     fatalError("init(coder:) has not been implemented")
   }
   
-  private func bindViewModel() {    
-    sendMoneyViewModel?.loginStatusPublisher
+  private func bindViewModel() {
+    loginViewModel?.loginStatusPublisher
       .receive(on: DispatchQueue.main)
       .sink { [weak self] success in
         if success {
@@ -41,12 +41,21 @@ class LoginViewController: SMTableViewController<SendMoneyCellModel> {
   private func navigateToMainScreen() {
     let viewModel = SendMoneyViewModel()
     let viewController = SendMoneyViewController(viewModel: viewModel)
-     navigationController?.pushViewController(viewController, animated: true)
-   }
-   
-   private func showErrorAlert() {
-     let alert = UIAlertController(title: "Login Failed", message: "Invalid username or password.", preferredStyle: .alert)
-     alert.addAction(UIAlertAction(title: "OK", style: .default))
-     present(alert, animated: true)
-   }
+    navigationController?.pushViewController(viewController, animated: true)
+  }
+  
+  private func showErrorAlert() {
+    let alert = UIAlertController(title: "Login Failed", message: "Invalid username or password.", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "OK", style: .default))
+    present(alert, animated: true)
+  }
+  
+  override func reloadUIForLanguageChange() {
+    super.reloadUIForLanguageChange()
+    view.setNeedsLayout()
+       view.layoutIfNeeded()
+    loginViewModel?.setupCellModels()
+    refreshAndReload()
+  }
+  
 }

@@ -16,7 +16,7 @@ class LoginViewModel: SMTableViewModel<SendMoneyCellModel> {
     setupCellModels()
   }
   
-  private func setupCellModels() {
+  func setupCellModels() {
     let spacer = SendMoneyCellModel(
       cellUIType: .spacer,
       cellProvider: CellProvider(cellType: SpacerCell.self),
@@ -27,7 +27,7 @@ class LoginViewModel: SMTableViewModel<SendMoneyCellModel> {
       cellUIType: .title,
       cellProvider: CellProvider(cellType: TitleCell.self),
       identifier: "title",
-      title: "Send Money App",
+      title: "sendMoneyApp".localized,
       placeHolder: "",
       validation: "",
       maxLength: 40,
@@ -44,7 +44,7 @@ class LoginViewModel: SMTableViewModel<SendMoneyCellModel> {
       cellUIType: .title,
       cellProvider: CellProvider(cellType: SubtitleCell.self),
       identifier: "subtitle",
-      title: "Welcom to send money app",
+      title: "welcomToSendMoneyApp".localized,
       placeHolder: "",
       validation: "",
       maxLength: 40,
@@ -61,8 +61,8 @@ class LoginViewModel: SMTableViewModel<SendMoneyCellModel> {
       cellUIType: .freeText,
       cellProvider: CellProvider(cellType: SendMoneyTextFieldCell.self),
       identifier: "email",
-      title: "Email",
-      placeHolder: "Email",
+      title: "email".localized,
+      placeHolder: "email".localized,
       validation: "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
       maxLength: 40,
       validationMessage: "Please enter valid email") { [weak self ]capturedValue in
@@ -74,8 +74,8 @@ class LoginViewModel: SMTableViewModel<SendMoneyCellModel> {
       cellUIType: .password,
       cellProvider: CellProvider(cellType: SendMoneyTextFieldCell.self),
       identifier: "password",
-      title: "Password",
-      placeHolder: "Password",
+      title: "password".localized,
+      placeHolder: "password".localized,
       validation: ".*",
       maxLength: 40,
       validationMessage: "") { [weak self] capturedValue in
@@ -92,7 +92,7 @@ class LoginViewModel: SMTableViewModel<SendMoneyCellModel> {
       cellUIType: .primaryButton,
       cellProvider: CellProvider(cellType: ButtonCell.self),
       identifier: "login",
-      title: "Sign in",
+      title: "signIn".localized,
       placeHolder: "",
       validation: ".*" ,
       maxLength: 40,

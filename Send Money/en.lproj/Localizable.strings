@@ -1,0 +1,18 @@
+/*
+  Localizable.strings
+  Send Money
+
+  Created by Pratheesh Bennet on 30/01/25.
+  
+*/
+"sendMoneyApp" = "Send Money App";
+"welcomToSendMoneyApp" =  "Welcom to send money app";
+"email" = "Email";
+"password" = "Password";
+"signIn" = "Sign in";
+"sendMoneyDetails" = "Send Money Details";
+"sendMoneyRequest" = "Send Money Request";
+"save" = "Save";
+"choose" = "Choose";
+"service" = "Service";
+"provider" = "Provider";
