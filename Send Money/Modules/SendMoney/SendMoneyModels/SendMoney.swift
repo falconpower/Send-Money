@@ -63,7 +63,6 @@ struct RequiredFields: Codable {
     }
 }
 
-// MARK: - Option
 struct Options: Codable {
     var label: String?
     var name: String?

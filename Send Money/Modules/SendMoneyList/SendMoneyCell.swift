@@ -40,8 +40,6 @@ class SendMoneyCell: UITableViewCell {
       $0.textAlignment = isRTL ? .right : .left
       $0.semanticContentAttribute = isRTL ? .forceRightToLeft : .forceLeftToRight
     }
-    
-    // Configure stackView
     stackView.axis = .vertical
     stackView.spacing = 8
     stackView.translatesAutoresizingMaskIntoConstraints = false
