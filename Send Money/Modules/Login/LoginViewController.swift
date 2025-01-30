@@ -46,8 +46,8 @@ class LoginViewController: SMTableViewController<SendMoneyCellModel> {
   }
   
   private func showErrorAlert() {
-    let alert = UIAlertController(title: "Login Failed", message: "Invalid username or password.", preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "OK", style: .default))
+    let alert = UIAlertController(title: "loginFailedTitle".localized, message: "invalidCredentialsMessage".localized, preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "okButton".localized, style: .default))
     present(alert, animated: true)
   }
   

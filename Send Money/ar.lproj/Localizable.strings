@@ -19,5 +19,11 @@
 "serviceName" = "اسم الخدمة";
 "providerName" = "اسم المزود";
 "amount" = "المبلغ";
+"back" = "رجوع";
+"done" = "تم";
+"loginFailedTitle" = "فشل تسجيل الدخول";
+"invalidCredentialsMessage" = "اسم المستخدم أو كلمة المرور غير صحيحة.";
+"okButton" = "حسناً";
+
 
 

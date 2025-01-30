@@ -44,7 +44,7 @@ class SendMoneyViewController: SMTableViewController<SendMoneyCellModel> {
     pickerView.dataSource = self
     let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
     let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-    let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(donePickerSelection))
+    let doneButton = UIBarButtonItem(title: "done".localized, style: .done, target: self, action: #selector(donePickerSelection))
     toolbar.setItems([flexSpace, doneButton], animated: false)
     pickerContainerView.addSubview(toolbar)
     pickerContainerView.addSubview(pickerView)

@@ -21,6 +21,9 @@ class SendMoneyListViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     self.title = "sendMoneyRequest".localized
+    let backButton = UIBarButtonItem()
+    backButton.title = ""
+    navigationItem.backBarButtonItem = backButton
     tableView.reloadData()
   }
   

@@ -41,7 +41,7 @@ class SendMoneyTextFieldCell: UITableViewCell, SMDynamicCell, UITextFieldDelegat
     textField.delegate = self
     let toolbar = UIToolbar()
     toolbar.sizeToFit()
-    let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dismissKeyboard))
+    let doneButton = UIBarButtonItem(title: "done".localized, style: .done, target: self, action: #selector(dismissKeyboard))
     let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
     
     toolbar.setItems([flexibleSpace, doneButton], animated: false)

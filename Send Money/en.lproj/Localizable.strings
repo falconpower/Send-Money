@@ -19,3 +19,9 @@
 "serviceName" = "Service Name";
 "providerName" = "Provider Name";
 "amount" = "Amount";
+"back" = "Back";
+"done" = "Done";
+"loginFailedTitle" = "Login Failed";
+"invalidCredentialsMessage" = "Invalid username or password.";
+"okButton" = "OK";
+
