@@ -1,3 +1,4 @@
 import Foundation
-protocol Action {  
+protocol Action {
+  var cellModel: SendMoneyCellModel? { get set }
 }
